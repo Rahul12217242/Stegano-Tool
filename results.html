@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+        h1 {
+            color: #58a6ff;
+        }
+        .message-box {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            word-wrap: break-word;
+        }
+        a {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #238636;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        a:hover {
+            background-color: #2ea043;
+        }
+        .back-link {
+            background-color: #8b949e;
+        }
+        .back-link:hover {
+            background-color: #c9d1d9;
+            color: #0d1117;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if encoded %}
+            <h1>Encoding Successful</h1>
+            <p>Your secret is now hidden. Download the new image below.</p>
+            <a href="{{ url_for('uploaded_file', filename=image_name) }}" download>Download Encoded Image</a>
+        {% elif decoded %}
+            <h1>Decoding Complete</h1>
+            <p>The hidden message is:</p>
+            <div class="message-box">
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="back-link">Go Back</a>
+    </div>
+</body>
+</html>
