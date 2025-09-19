@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Tool</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+        h1 {
+            color: #58a6ff;
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 1rem;
+            margin-top: 0;
+        }
+        .tool-section {
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        h2 {
+            margin-top: 0;
+            color: #8b949e;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input[type="file"], textarea, button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            background-color: #238636;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #2ea043;
+        }
+        .decode-btn {
+            background-color: #8b949e;
+        }
+        .decode-btn:hover {
+            background-color: #c9d1d9;
+            color: #0d1117;
+        }
+        .flash-messages {
+            list-style: none;
+            padding: 0;
+        }
+        .flash-messages li {
+            background-color: #b33e2b;
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Steganography :: Hide in Plain Sight</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="tool-section">
+            <h2>Encode: Hide a Message</h2>
+            <form method="post" enctype="multipart/form-data">
+                <label for="encode-image">Upload Image (PNG, BMP):</label>
+                <input type="file" name="image" id="encode-image" required>
+                
+                <label for="secret">Secret Message:</label>
+                <textarea name="secret" id="secret" placeholder="The words you want to hide..." required></textarea>
+                
+                <button type="submit" name="encode">Generate Encoded Image</button>
+            </form>
+        </div>
+
+        <div class="tool-section">
+            <h2>Decode: Reveal a Message</h2>
+            <form method="post" enctype="multipart/form-data">
+                <label for="decode-image">Upload Image:</label>
+                <input type="file" name="image" id="decode-image" required>
+                
+                <button type="submit" name="decode" class="decode-btn">Reveal Secret</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
